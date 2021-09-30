@@ -59,33 +59,33 @@ class LaravelAttributeObserverServiceProvider extends PackageServiceProvider
                     try {
                         $class::{$event}(
                             function (Model $model) use ($event, $app) {
-                            $className = get_class($model);
+                                $className = get_class($model);
 
-                            if (! isset($this->observers[$className])) {
-                                return;
-                            }
+                                if (! isset($this->observers[$className])) {
+                                    return;
+                                }
 
-                            foreach ($model->getChanges() as $key => $value) {
-                                foreach ($this->observers[$className] as $observer) {
-                                    if (! is_object($observer)) {
-                                        try {
-                                            $observerInstance = $app->make($observer);
-                                        } catch (BindingResolutionException $bindingResolutionException) {
-                                            Log::error($bindingResolutionException);
+                                foreach ($model->getChanges() as $key => $value) {
+                                    foreach ($this->observers[$className] as $observer) {
+                                        if (! is_object($observer)) {
+                                            try {
+                                                $observerInstance = $app->make($observer);
+                                            } catch (BindingResolutionException $bindingResolutionException) {
+                                                Log::error($bindingResolutionException);
 
-                                            continue;
+                                                continue;
+                                            }
                                         }
-                                    }
 
-                                    if (isset($observerInstance)) {
-                                        $method = 'on' . Str::studly($key) . ucfirst($event);
-                                        if (method_exists($observerInstance, $method)) {
-                                            $observerInstance->{$method}($model, $value, $model->getOriginal($key));
+                                        if (isset($observerInstance)) {
+                                            $method = 'on' . Str::studly($key) . ucfirst($event);
+                                            if (method_exists($observerInstance, $method)) {
+                                                $observerInstance->{$method}($model, $value, $model->getOriginal($key));
+                                            }
                                         }
                                     }
                                 }
                             }
-                        }
                         );
                     } catch (\Throwable $exception) {
                         Log::error($exception);
