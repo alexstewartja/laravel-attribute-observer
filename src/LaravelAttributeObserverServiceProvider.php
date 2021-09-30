@@ -58,7 +58,7 @@ class LaravelAttributeObserverServiceProvider extends PackageServiceProvider
         }
 
         foreach (array_keys($this->observers) as $modelClass) {
-            if (!is_object($modelClass) && class_exists($modelClass)) {
+            if (! is_object($modelClass) && class_exists($modelClass)) {
 
                 // Carry on if no attribute observers are defined for this model
                 if (empty($this->observers[$modelClass])) {
@@ -66,7 +66,7 @@ class LaravelAttributeObserverServiceProvider extends PackageServiceProvider
                 }
 
                 foreach ($this->observers[$modelClass] as $observer) {
-                    if (!is_object($observer) && class_exists($observer)) {
+                    if (! is_object($observer) && class_exists($observer)) {
                         try {
                             $observerInstance = App::make($observer);
                             $observerEventsAttribs = $this->parseObserverMethods($observerInstance);
@@ -74,10 +74,8 @@ class LaravelAttributeObserverServiceProvider extends PackageServiceProvider
 
                             foreach ($observedEvents as $observedEvent) {
                                 $modelClass::{$observedEvent}(function (Model $model) use ($observedEvent, $observerEventsAttribs, $observerInstance) {
-
                                     if ($model->wasChanged()) {
                                         foreach ($observerEventsAttribs[$observedEvent] as $attribute) {
-
                                             if ($this->modelHasAttribute($model, $attribute) && $model->wasChanged($attribute)) {
                                                 $method = 'on' . Str::studly($attribute) . Str::ucfirst($observedEvent);
                                                 $observerInstance->{$method}($model, $model->getAttributeValue($attribute), $model->getOriginal($attribute));
@@ -88,6 +86,7 @@ class LaravelAttributeObserverServiceProvider extends PackageServiceProvider
                             }
                         } catch (BindingResolutionException $bindingResolutionException) {
                             Log::error($bindingResolutionException);
+
                             continue;
                         }
                     }
@@ -104,7 +103,7 @@ class LaravelAttributeObserverServiceProvider extends PackageServiceProvider
      */
     private function parseObserverMethods(object|string $observer_object_or_class): array
     {
-        $events_attribs_mapping = array();
+        $events_attribs_mapping = [];
 
         // Methods that react to attribute changes start with 'on'. Let's grab those...
         $observerMethods = array_map(
@@ -141,7 +140,7 @@ class LaravelAttributeObserverServiceProvider extends PackageServiceProvider
      */
     private function modelHasAttribute(Model $model, string $attribute): bool
     {
-        return !method_exists($model, $attribute) &&
+        return ! method_exists($model, $attribute) &&
             (array_key_exists($attribute, $model->getAttributes()) ||
                 array_key_exists($attribute, $model->getCasts()) ||
                 $model->hasGetMutator($attribute) ||
