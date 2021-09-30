@@ -1,4 +1,6 @@
-# Observe (and react to) attribute changes made on Eloquent models.
+# Laravel Attribute Observer
+
+### Observe (and react to) attribute changes made on Eloquent models.
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/alexstewartja/laravel-attribute-observer.svg?style=flat-square)](https://packagist.org/packages/alexstewartja/laravel-attribute-observer)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/alexstewartja/laravel-attribute-observer/run-tests?label=tests)](https://github.com/alexstewartja/laravel-attribute-observer/actions?query=workflow%3Arun-tests+branch%3Amain)
@@ -109,7 +111,7 @@ class OrderStatusObserver
 }
 ```
 
-_Attribute Observer methods are always supplied with the model instance, the new attribute value and the previous attribute
+> _Attribute Observer methods are always supplied with the model instance, the new attribute value and the previous attribute
 value, in that order._
 
 ## Events
@@ -122,7 +124,8 @@ The naming convention to follow when defining attribute observer methods is: **o
 So, let's say we want to check a user's email against a global spam/vanity mail list each time they attempt to update it,
 we would implement that logic in an attribute observer method called `onEmailUpdating`.
 
-_Note that the attribute name and event must be in **[PascalCase](https://techterms.com/definition/pascalcase)**._
+> _Note that the attribute name must be in **[PascalCase](https://techterms.com/definition/pascalcase)** and the
+> event name must be **[Capitalized](https://wikipedia.org/wiki/Capitalization)**._
 
 ## Testing
 
