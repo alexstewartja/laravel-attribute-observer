@@ -1,0 +1,21 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ namespacedModel }};
+
+class {{ class }}
+{
+    /**
+     * Handle changes to the "id" field of {{ model }} on "created" events.
+     *
+     * @param \{{ namespacedModel }} ${{ modelVariable }}
+     * @param mixed $newValue The current value of the field
+     * @param mixed $oldValue The previous value of the field
+     * @return void
+     */
+    public function onIdCreated({{ model }} ${{ modelVariable }}, mixed $newValue, mixed $oldValue)
+    {
+        //
+    }
+}
