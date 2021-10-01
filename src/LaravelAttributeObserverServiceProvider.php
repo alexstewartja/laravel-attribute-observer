@@ -103,7 +103,7 @@ class LaravelAttributeObserverServiceProvider extends PackageServiceProvider
      */
     private function parseObserverMethods($observer_object_or_class): array
     {
-        $events_attribs_mapping = array();
+        $events_attribs_mapping = [];
 
         // Methods that react to attribute changes start with 'on'. Let's grab those...
         $observerMethods = array_map(
