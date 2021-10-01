@@ -13,19 +13,19 @@ class LaravelAttributeObserverMakeCommand extends ObserverMakeCommand
 
     protected $type = 'Attribute Observer';
 
-    protected function getStub()
+    protected function getStub(): string
     {
         return $this->option('model')
             ? __DIR__ . '/stubs/attribute-observer.stub'
             : $this->resolveStubPath('/stubs/observer.plain.stub');
     }
 
-    protected function getDefaultNamespace($rootNamespace)
+    protected function getDefaultNamespace($rootNamespace): string
     {
         return $rootNamespace . '\AttributeObservers';
     }
 
-    protected function getOptions()
+    protected function getOptions(): array
     {
         return [
             ['model', 'm', InputOption::VALUE_OPTIONAL, 'The model that the attribute observer applies to.'],

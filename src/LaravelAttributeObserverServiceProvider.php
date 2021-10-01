@@ -98,12 +98,12 @@ class LaravelAttributeObserverServiceProvider extends PackageServiceProvider
     /**
      * Scan an attribute observer, then parse and collate all 'legal' methods defined on it.
      *
-     * @param object|string $observer_object_or_class
+     * @param mixed $observer_object_or_class Object or fully qualified class name as a string
      * @return array
      */
-    private function parseObserverMethods(object|string $observer_object_or_class): array
+    private function parseObserverMethods($observer_object_or_class): array
     {
-        $events_attribs_mapping = [];
+        $events_attribs_mapping = array();
 
         // Methods that react to attribute changes start with 'on'. Let's grab those...
         $observerMethods = array_map(
