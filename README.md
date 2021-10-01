@@ -1,11 +1,11 @@
 # Laravel Attribute Observer
 
-### Observe (and react to) attribute changes made on Eloquent models.
-
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/alexstewartja/laravel-attribute-observer.svg?style=flat-square)](https://packagist.org/packages/alexstewartja/laravel-attribute-observer)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/alexstewartja/laravel-attribute-observer/run-tests?label=tests)](https://github.com/alexstewartja/laravel-attribute-observer/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/alexstewartja/laravel-attribute-observer/Check%20&%20fix%20styling?label=code%20style)](https://github.com/alexstewartja/laravel-attribute-observer/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/alexstewartja/laravel-attribute-observer.svg?style=flat-square)](https://packagist.org/packages/alexstewartja/laravel-attribute-observer)
+
+### Observe (and react to) attribute changes made on Eloquent models.
 
 ## Requirements
 
