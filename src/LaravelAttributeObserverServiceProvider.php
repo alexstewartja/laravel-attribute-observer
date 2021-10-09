@@ -67,27 +67,21 @@ class LaravelAttributeObserverServiceProvider extends PackageServiceProvider
 
                 foreach ($this->observers[$modelClass] as $observer) {
                     if (! is_object($observer) && class_exists($observer)) {
-                        try {
-                            $observerInstance = App::make($observer);
-                            $observerEventsAttribs = $this->parseObserverMethods($observerInstance);
-                            $observedEvents = array_keys($observerEventsAttribs);
+                        $observerInstance = App::make($observer);
+                        $observerEventsAttribs = $this->parseObserverMethods($observerInstance);
+                        $observedEvents = array_keys($observerEventsAttribs);
 
-                            foreach ($observedEvents as $observedEvent) {
-                                $modelClass::{$observedEvent}(function (Model $model) use ($observedEvent, $observerEventsAttribs, $observerInstance) {
-                                    if ($model->wasChanged()) {
-                                        foreach ($observerEventsAttribs[$observedEvent] as $attribute) {
-                                            if ($this->modelHasAttribute($model, $attribute) && $model->wasChanged($attribute)) {
-                                                $method = 'on' . Str::studly($attribute) . Str::ucfirst($observedEvent);
-                                                $observerInstance->{$method}($model, $model->getAttributeValue($attribute), $model->getOriginal($attribute));
-                                            }
+                        foreach ($observedEvents as $observedEvent) {
+                            $modelClass::{$observedEvent}(function (Model $model) use ($observedEvent, $observerEventsAttribs, $observerInstance) {
+                                if ($model->wasChanged()) {
+                                    foreach ($observerEventsAttribs[$observedEvent] as $attribute) {
+                                        if ($this->modelHasAttribute($model, $attribute) && $model->wasChanged($attribute)) {
+                                            $method = 'on' . Str::studly($attribute) . Str::ucfirst($observedEvent);
+                                            $observerInstance->{$method}($model, $model->getAttributeValue($attribute), $model->getOriginal($attribute));
                                         }
                                     }
-                                });
-                            }
-                        } catch (BindingResolutionException $bindingResolutionException) {
-                            Log::error($bindingResolutionException);
-
-                            continue;
+                                }
+                            });
                         }
                     }
                 }
