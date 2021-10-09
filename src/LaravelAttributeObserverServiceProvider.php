@@ -3,10 +3,8 @@
 namespace AlexStewartJA\LaravelAttributeObserver;
 
 use AlexStewartJA\LaravelAttributeObserver\Commands\LaravelAttributeObserverMakeCommand;
-use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
