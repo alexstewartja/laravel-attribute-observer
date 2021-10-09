@@ -2,6 +2,11 @@
 
 All notable changes to `laravel-attribute-observer` will be documented in this file.
 
+## 1.0.4 - 2021-10-09
+
+- Optimized error handling logic
+- Updated README
+
 ## 1.0.3 - 2021-09-30
 
 - Relaxed PHP and Laravel version requirements
