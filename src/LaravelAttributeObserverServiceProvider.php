@@ -51,24 +51,16 @@ class LaravelAttributeObserverServiceProvider extends PackageServiceProvider
      */
     private function observeModels(): void
     {
-        if (empty($this->observers)) {
-            return;
-        }
+        if (empty($this->observers)) return;
 
         foreach (array_keys($this->observers) as $modelClass) {
-            if (! (! is_object($modelClass) && class_exists($modelClass))) {
-                continue;
-            }
+            if (!(!is_object($modelClass) && class_exists($modelClass))) continue;
 
             // Carry on if no attribute observers are defined for this model
-            if (empty($this->observers[$modelClass])) {
-                continue;
-            }
+            if (empty($this->observers[$modelClass])) continue;
 
             foreach ($this->observers[$modelClass] as $observer) {
-                if (! (! is_object($observer) && class_exists($observer))) {
-                    continue;
-                }
+                if (!(!is_object($observer) && class_exists($observer))) continue;
 
                 $observerInstance = App::make($observer);
                 $observerEventsAttribs = $this->parseObserverMethods($observerInstance);
@@ -76,9 +68,7 @@ class LaravelAttributeObserverServiceProvider extends PackageServiceProvider
 
                 foreach ($observedEvents as $observedEvent) {
                     $modelClass::{$observedEvent}(function (Model $model) use ($observedEvent, $observerEventsAttribs, $observerInstance) {
-                        if (! $model->wasChanged()) {
-                            return;
-                        }
+                        if (!$model->wasChanged()) return;
 
                         foreach ($observerEventsAttribs[$observedEvent] as $attribute) {
                             if ($this->modelHasAttribute($model, $attribute) && $model->wasChanged($attribute)) {
@@ -111,9 +101,7 @@ class LaravelAttributeObserverServiceProvider extends PackageServiceProvider
         );
 
         foreach ($observerMethods as $observerMethod) {
-            if (! $observerMethod) {
-                continue;
-            }
+            if (!$observerMethod) continue;
 
             // The last capitalized word in the method's name is always the event being reacted to
             preg_match(self::EVENT_REGEX, $observerMethod, $matches);
@@ -138,7 +126,7 @@ class LaravelAttributeObserverServiceProvider extends PackageServiceProvider
      */
     private function modelHasAttribute(Model $model, string $attribute): bool
     {
-        return ! method_exists($model, $attribute) &&
+        return !method_exists($model, $attribute) &&
             (array_key_exists($attribute, $model->getAttributes()) ||
                 array_key_exists($attribute, $model->getCasts()) ||
                 $model->hasGetMutator($attribute) ||
