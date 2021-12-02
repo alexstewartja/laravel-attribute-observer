@@ -56,7 +56,7 @@ class LaravelAttributeObserverServiceProvider extends PackageServiceProvider
         }
 
         foreach (array_keys($this->observers) as $modelClass) {
-            if (!(!is_object($modelClass) && class_exists($modelClass))) {
+            if (! (! is_object($modelClass) && class_exists($modelClass))) {
                 continue;
             }
 
@@ -66,7 +66,7 @@ class LaravelAttributeObserverServiceProvider extends PackageServiceProvider
             }
 
             foreach ($this->observers[$modelClass] as $observer) {
-                if (!(!is_object($observer) && class_exists($observer))) {
+                if (! (! is_object($observer) && class_exists($observer))) {
                     continue;
                 }
 
@@ -76,7 +76,7 @@ class LaravelAttributeObserverServiceProvider extends PackageServiceProvider
 
                 foreach ($observedEvents as $observedEvent) {
                     $modelClass::{$observedEvent}(function (Model $model) use ($observedEvent, $observerEventsAttribs, $observerInstance) {
-                        if (!$model->wasChanged()) {
+                        if (! $model->wasChanged()) {
                             return;
                         }
 
@@ -111,7 +111,7 @@ class LaravelAttributeObserverServiceProvider extends PackageServiceProvider
         );
 
         foreach ($observerMethods as $observerMethod) {
-            if (!$observerMethod) {
+            if (! $observerMethod) {
                 continue;
             }
 
@@ -138,7 +138,7 @@ class LaravelAttributeObserverServiceProvider extends PackageServiceProvider
      */
     private function modelHasAttribute(Model $model, string $attribute): bool
     {
-        return !method_exists($model, $attribute) &&
+        return ! method_exists($model, $attribute) &&
             (array_key_exists($attribute, $model->getAttributes()) ||
                 array_key_exists($attribute, $model->getCasts()) ||
                 $model->hasGetMutator($attribute) ||
