@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-attribute-observer` will be documented in this file.
 
+## 1.2.1 - 2021-12-02
+
+- Updated code style in Service Provider - Credit: @RobinBastiaan
+- Added Artisan command tests
+- Updated GH Sponsor/FUNDING information
+
 ## 1.0.4 - 2021-10-09
 
 - Optimized error handling logic
