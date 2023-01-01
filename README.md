@@ -3,8 +3,8 @@
 ![Laravel Attribute Observer - Social Image](https://banners.beyondco.de/Laravel%20Attribute%20Observer.png?theme=light&packageManager=composer+require&packageName=alexstewartja%2Flaravel-attribute-observer&pattern=floatingCogs&style=style_2&description=Observe+%28and+react+to%29+attribute+changes+made+on+Eloquent+models.&md=1&showWatermark=0&fontSize=125px&images=https%3A%2F%2Flaravel.com%2Fimg%2Flogomark.min.svg)
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/alexstewartja/laravel-attribute-observer.svg?style=flat-square)](https://packagist.org/packages/alexstewartja/laravel-attribute-observer)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/alexstewartja/laravel-attribute-observer/run-tests?label=tests)](https://github.com/alexstewartja/laravel-attribute-observer/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/alexstewartja/laravel-attribute-observer/Check%20&%20fix%20styling?label=code%20style)](https://github.com/alexstewartja/laravel-attribute-observer/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/alexstewartja/laravel-attribute-observer/run-tests.yml?label=tests)](https://github.com/alexstewartja/laravel-attribute-observer/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/alexstewartja/laravel-attribute-observer/php-cs-fixer.yml?label=code%20style)](https://github.com/alexstewartja/laravel-attribute-observer/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/alexstewartja/laravel-attribute-observer.svg?style=flat-square)](https://packagist.org/packages/alexstewartja/laravel-attribute-observer)
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg?style=flat-square)](https://www.paypal.com/donate?business=iamalexstewart%40gmail.com&no_recurring=0&item_name=Laravel+Attribute+Observer&currency_code=USD)
