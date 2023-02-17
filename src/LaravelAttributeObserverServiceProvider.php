@@ -146,7 +146,7 @@ class LaravelAttributeObserverServiceProvider extends PackageServiceProvider
     }
 
     /**
-     * Properly check if the model was changed or is dirty.
+     * Dynamically check if the model was changed or is dirty.
      *
      * @param Model $model
      * @param string $event
@@ -155,12 +155,8 @@ class LaravelAttributeObserverServiceProvider extends PackageServiceProvider
      */
     private function wasChanged(Model $model, string $event, string $attribute = null): bool
     {
-        $postEvents = [
-            'created',
-            'updated',
-            'saved',
-            'deleted',
-        ];
+        // Pull past-tense/post-mutation events from constants array
+        $postEvents = array_filter(self::EVENTS, fn($event) => Str::endsWith($event, 'ed'));
 
         if (in_array($event, $postEvents)) {
             return $attribute
