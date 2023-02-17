@@ -156,7 +156,7 @@ class LaravelAttributeObserverServiceProvider extends PackageServiceProvider
     private function wasChanged(Model $model, string $event, string $attribute = null): bool
     {
         // Pull past-tense/post-mutation events from constants array
-        $postEvents = array_filter(self::EVENTS, fn ($event) => Str::endsWith($event, 'ed'));
+        $postEvents = array_filter(self::EVENTS, fn ($e) => Str::endsWith($e, 'ed'));
 
         if (in_array($event, $postEvents)) {
             return $attribute
