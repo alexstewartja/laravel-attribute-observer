@@ -76,12 +76,12 @@ class LaravelAttributeObserverServiceProvider extends PackageServiceProvider
 
                 foreach ($observedEvents as $observedEvent) {
                     $modelClass::{$observedEvent}(function (Model $model) use ($observedEvent, $observerEventsAttribs, $observerInstance) {
-                        if (! $model->wasChanged()) {
+                        if (! $this->wasChanged($model, $observedEvent)) {
                             return;
                         }
 
                         foreach ($observerEventsAttribs[$observedEvent] as $attribute) {
-                            if ($this->modelHasAttribute($model, $attribute) && $model->wasChanged($attribute)) {
+                            if ($this->modelHasAttribute($model, $attribute) && $this->wasChanged($model, $observedEvent, $attribute)) {
                                 $method = 'on' . Str::studly($attribute) . Str::ucfirst($observedEvent);
                                 $observerInstance->{$method}($model, $model->getAttributeValue($attribute), $model->getOriginal($attribute));
                             }
@@ -143,5 +143,29 @@ class LaravelAttributeObserverServiceProvider extends PackageServiceProvider
                 array_key_exists($attribute, $model->getCasts()) ||
                 $model->hasGetMutator($attribute) ||
                 array_key_exists($attribute, $model->getRelations()));
+    }
+
+    /**
+     * Dynamically check if the model was changed or is dirty.
+     *
+     * @param Model $model
+     * @param string $event
+     * @param string|null $attribute
+     * @return bool
+     */
+    private function wasChanged(Model $model, string $event, string $attribute = null): bool
+    {
+        // Pull past-tense/post-mutation events from constants array
+        $postEvents = array_filter(self::EVENTS, fn ($event) => Str::endsWith($event, 'ed'));
+
+        if (in_array($event, $postEvents)) {
+            return $attribute
+                ? $model->wasChanged($attribute)
+                : $model->wasChanged();
+        }
+
+        return $attribute
+            ? $model->isDirty($attribute)
+            : $model->isDirty();
     }
 }
