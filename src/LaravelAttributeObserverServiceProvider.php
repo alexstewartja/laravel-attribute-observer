@@ -158,6 +158,11 @@ class LaravelAttributeObserverServiceProvider extends PackageServiceProvider
         // Pull past-tense/post-mutation events from constants array
         $postEvents = array_filter(self::EVENTS, fn ($e) => Str::endsWith($e, 'ed'));
 
+        // If the model was just inserted then all `created` events are valid
+        if ($event === 'created' && $model->wasRecentlyCreated) {
+            return true;
+        }
+
         if (in_array($event, $postEvents)) {
             return $attribute
                 ? $model->wasChanged($attribute)
