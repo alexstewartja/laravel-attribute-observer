@@ -56,21 +56,29 @@ class LaravelAttributeObserverServiceProvider extends PackageServiceProvider
         }
 
         foreach (array_keys($this->observers) as $modelClass) {
-            if (! (! is_object($modelClass) && class_exists($modelClass))) {
-                continue;
-            }
-
             // Carry on if no attribute observers are defined for this model
             if (empty($this->observers[$modelClass])) {
                 continue;
             }
 
-            foreach ($this->observers[$modelClass] as $observer) {
-                if (! (! is_object($observer) && class_exists($observer))) {
+            if (is_object($modelClass)) {
+                $modelClass = get_class($modelClass);
+            }
+
+            if (! class_exists($modelClass)) {
+                continue;
+            }
+
+            foreach ($this->observers[$modelClass] as $observerClass) {
+                if (is_object($observerClass)) {
+                    $observerClass = get_class($observerClass);
+                }
+
+                if (! class_exists($observerClass)) {
                     continue;
                 }
 
-                $observerInstance = App::make($observer);
+                $observerInstance = App::make($observerClass);
                 $observerEventsAttribs = $this->parseObserverMethods($observerInstance);
                 $observedEvents = array_keys($observerEventsAttribs);
 
@@ -95,19 +103,19 @@ class LaravelAttributeObserverServiceProvider extends PackageServiceProvider
     /**
      * Scan an attribute observer, then parse and collate all 'legal' methods defined on it.
      *
-     * @param mixed $observer_object_or_class Object or fully qualified class name as a string
+     * @param mixed $observerObjectOrClass Object or fully qualified class name as a string
      * @return array
      */
-    private function parseObserverMethods($observer_object_or_class): array
+    private function parseObserverMethods($observerObjectOrClass): array
     {
-        $events_attribs_mapping = [];
+        $eventsAttribsMapping = [];
 
         // Methods that react to attribute changes start with 'on'. Let's grab those...
         $observerMethods = array_map(
             static function ($method) {
                 return Str::startsWith($method, 'on') ? substr($method, 2) : false;
             },
-            get_class_methods($observer_object_or_class)
+            get_class_methods($observerObjectOrClass)
         );
 
         foreach ($observerMethods as $observerMethod) {
@@ -122,11 +130,11 @@ class LaravelAttributeObserverServiceProvider extends PackageServiceProvider
             if (in_array($event, self::EVENTS)) {
                 $attribute = Str::snake(str_replace($matches[1], '', $observerMethod));
 
-                $events_attribs_mapping[$event][] = $attribute;
+                $eventsAttribsMapping[$event][] = $attribute;
             }
         }
 
-        return $events_attribs_mapping;
+        return $eventsAttribsMapping;
     }
 
     /**
