@@ -163,13 +163,18 @@ class LaravelAttributeObserverServiceProvider extends PackageServiceProvider
      */
     private function wasChanged(Model $model, string $event, string $attribute = null): bool
     {
-        // Pull past-tense/post-mutation events from constants array
-        $postEvents = array_filter(self::EVENTS, fn ($e) => Str::endsWith($e, 'ed'));
+        // If the model will be/was deleted then all `delet*` events are valid
+        if (Str::startsWith($event, 'delet')) {
+            return true;
+        }
 
         // If the model was just inserted then all `created` events are valid
         if ($event === 'created' && $model->wasRecentlyCreated) {
             return true;
         }
+
+        // Pull past-tense/post-mutation events from constants array
+        $postEvents = array_filter(self::EVENTS, fn ($e) => Str::endsWith($e, 'ed'));
 
         if (in_array($event, $postEvents)) {
             return $attribute
