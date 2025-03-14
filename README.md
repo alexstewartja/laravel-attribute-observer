@@ -170,8 +170,7 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 ## Donations
 
 I maintain this package in my spare time.
-If it's beneficial to you, consider donating or buying me a coffee to keep it improving.
+If it's beneficial to you, consider buying me a coffee to keep it improving.
 
-[![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg?style=flat-square)](https://www.paypal.com/donate?business=iamalexstewart%40gmail.com&no_recurring=0&item_name=Laravel+Attribute+Observer&currency_code=USD)
-[![Buy Me A Coffee](https://img.shields.io/badge/-buy_me_a%C2%A0coffee-orange?logo=buy-me-a-coffee)](https://www.buymeacoffee.com/asja)
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy_Me-A_Coffee-orange?logo=buy-me-a-coffee)](https://buymeacoffee.com/alexstewartja)
 
