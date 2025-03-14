@@ -2,29 +2,45 @@ name: run-tests
 
 on:
   push:
-    branches: [main]
+    paths:
+      - '**.php'
+      - '.github/workflows/run-tests.yml'
+      - 'phpunit.xml.dist'
+      - 'composer.json'
+      - 'composer.lock'
   pull_request:
     branches: [main]
 
 jobs:
   test:
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
     strategy:
       fail-fast: true
       matrix:
         os: [ubuntu-latest, windows-latest]
-        php: [8.0]
-        laravel: [9.*]
+        php: [8.4, 8.3, 8.2, 8.1, 8.0, 7.4]
+        laravel: [12.*, 11.*, 10.*, 9.*, 8.*, 7.*]
         stability: [prefer-lowest, prefer-stable]
         include:
+          - laravel: 12.*
+            testbench: ^10.1
+          - laravel: 11.*
+            testbench: ^9.1
+          - laravel: 10.*
+            testbench: ^8.3
           - laravel: 9.*
             testbench: ^7.5
+          - laravel: 8.*
+            testbench: ^6.4
+          - laravel: 7.*
+            testbench: ^5.2
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
