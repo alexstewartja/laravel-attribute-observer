@@ -8,4 +8,4 @@ contact_links:
       about: Share ideas for new features
     - name: Report a bug
       url: https://github.com/alexstewartja/laravel-attribute-observer/issues/new
-      about: Report a reproducable bug
+      about: Report a reproducible bug
