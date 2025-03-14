@@ -2,18 +2,19 @@
 
 ![Laravel Attribute Observer - Social Image](https://banners.beyondco.de/Laravel%20Attribute%20Observer.png?theme=light&packageManager=composer+require&packageName=alexstewartja%2Flaravel-attribute-observer&pattern=floatingCogs&style=style_2&description=Observe+%28and+react+to%29+attribute+changes+made+on+Eloquent+models.&md=1&showWatermark=0&fontSize=125px&images=https%3A%2F%2Flaravel.com%2Fimg%2Flogomark.min.svg)
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/alexstewartja/laravel-attribute-observer.svg?style=flat-square)](https://packagist.org/packages/alexstewartja/laravel-attribute-observer)
+[![Latest Stable Version](http://poser.pugx.org/alexstewartja/laravel-attribute-observer/v)](https://packagist.org/packages/alexstewartja/laravel-attribute-observer)
+[![Total Downloads](http://poser.pugx.org/alexstewartja/laravel-attribute-observer/downloads)](https://packagist.org/packages/alexstewartja/laravel-attribute-observer)
+[![License](http://poser.pugx.org/alexstewartja/laravel-attribute-observer/license)](https://packagist.org/packages/alexstewartja/laravel-attribute-observer)
+
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/alexstewartja/laravel-attribute-observer/run-tests.yml?label=tests)](https://github.com/alexstewartja/laravel-attribute-observer/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/alexstewartja/laravel-attribute-observer/php-cs-fixer.yml?label=code%20style)](https://github.com/alexstewartja/laravel-attribute-observer/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/alexstewartja/laravel-attribute-observer.svg?style=flat-square)](https://packagist.org/packages/alexstewartja/laravel-attribute-observer)
 
-[![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg?style=flat-square)](https://www.paypal.com/donate?business=iamalexstewart%40gmail.com&no_recurring=0&item_name=Laravel+Attribute+Observer&currency_code=USD)
-[![Buy Me A Coffee](https://img.shields.io/badge/-buy_me_a%C2%A0coffee-orange?logo=buy-me-a-coffee)](https://www.buymeacoffee.com/asja)
+[![PHP Versions Supported](http://poser.pugx.org/alexstewartja/laravel-attribute-observer/require/php)](https://packagist.org/packages/alexstewartja/laravel-attribute-observer)
+[![Laravel Versions Supported](https://img.shields.io/packagist/dependency-v/alexstewartja/laravel-attribute-observer/illuminate/contracts?label=laravel)](https://packagist.org/packages/alexstewartja/laravel-attribute-observer)
 
-## Requirements
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy_Me-A_Coffee-orange?logo=buy-me-a-coffee)](https://buymeacoffee.com/alexstewartja)
 
-- PHP: 7.4+
-- Laravel: 7+
+A Laravel package which allows you to observe (and react to) attribute changes made on Eloquent models.
 
 ## Installation
 
