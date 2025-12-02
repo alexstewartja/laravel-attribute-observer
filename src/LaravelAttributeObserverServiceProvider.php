@@ -161,7 +161,7 @@ class LaravelAttributeObserverServiceProvider extends PackageServiceProvider
      * @param string|null $attribute
      * @return bool
      */
-    private function wasChanged(Model $model, string $event, string $attribute = null): bool
+    private function wasChanged(Model $model, string $event, ?string $attribute = null): bool
     {
         // If the model will be/was deleted then all `delet*` events are valid
         if (Str::startsWith($event, 'delet')) {
